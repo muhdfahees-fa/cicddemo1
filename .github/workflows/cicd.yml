@@ -1,0 +1,27 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t localhost:5000/demo-app:${{ github.sha }} .
+
+      - name: Push image to local registry
+        run: docker push localhost:5000/demo-app:${{ github.sha }}
+
+      - name: Deploy container
+        run: |
+          docker rm -f demo-app || true
+          docker run -d --name demo-app -p 8080:5000 \
+            localhost:5000/demo-app:${{ github.sha }}
+
+      - name: Health check
+        run: sleep 3 && curl -f http://localhost:8080/health

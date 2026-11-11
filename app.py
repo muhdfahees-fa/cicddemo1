@@ -2,7 +2,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
-VERSION = "v1"
+VERSION = "v2"
 
 
 @app.route("/")
@@ -23,7 +23,7 @@ def home():
         body {{
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            background: linear-gradient(135deg, #0a192f, #20394f, #0a192f);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -192,7 +192,7 @@ def home():
     <div class="container">
         <div class="card">
             <div class="icon">&#9881;</div>
-            <h1>CI/CD Pipeline Demo</h1>
+            <h1>CI/CD Pipeline Live</h1>
             <div class="version">{VERSION}</div>
 
             <div class="pipeline">
